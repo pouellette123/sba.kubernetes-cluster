@@ -1,0 +1,323 @@
+Paul Ouellette SBA Kubernetes Cluster          Mon 18 Jan 2021 07:27:28 PM EST
+
+kubernetes-cluster-information.sh script output:
+
+This script will run commands to get information on the state 
+of the kubernetes cluster running for the sba-kubernetes-cluster.
+
+The cluster information is provided by kubectl cluster-info.
+[0;32mKubernetes control plane[0m is running at [0;33mhttps://192.168.49.2:8443[0m
+[0;32mKubeDNS[0m is running at [0;33mhttps://192.168.49.2:8443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy[0m
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+
+The following minikube IP address is used in the browswer to bring up the app.
+It is the node's IP address, the entry point into the cluster.
+minikube IP address is: 192.168.49.2
+
+The cluseter nodes information short form, retrieved by kubectl get nodes, is:
+NAME       STATUS   ROLES                  AGE    VERSION
+minikube   Ready    control-plane,master   4d5h   v1.20.0
+
+The pyflaskapp-service Node PORT number, mapped 8080 internally to 32001 externally,
+is used after the IP address listed above in the browswer to bring up the app.
+The cluseter services information short form, retrieved by kubectl get services, is:
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)          AGE
+kubernetes           ClusterIP   10.96.0.1    <none>        443/TCP          4d5h
+pyflaskapp-service   NodePort    10.99.5.91   <none>        8080:32001/TCP   25h
+
+The cluseter deployments information short form, retrieved by kubectl get deployments, is:
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+pyflaskapp-deployment   3/3     3            3           25h
+
+The cluseter pods information short form, retrieved by kubectl get pods, is:
+NAME                                     READY   STATUS    RESTARTS   AGE
+pyflaskapp-deployment-7b999b7f87-9cjt9   1/1     Running   0          25h
+pyflaskapp-deployment-7b999b7f87-qqb72   1/1     Running   0          25h
+pyflaskapp-deployment-7b999b7f87-sjdgc   1/1     Running   0          25h
+
+The cluseter nodes information long form, retrieved by kubectl describe nodes, is:
+Name:               minikube
+Roles:              control-plane,master
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=minikube
+                    kubernetes.io/os=linux
+                    minikube.k8s.io/commit=9f1e482427589ff8451c4723b6ba53bb9742fbb1
+                    minikube.k8s.io/name=minikube
+                    minikube.k8s.io/updated_at=2021_01_14T14_20_24_0700
+                    minikube.k8s.io/version=v1.16.0
+                    node-role.kubernetes.io/control-plane=
+                    node-role.kubernetes.io/master=
+Annotations:        kubeadm.alpha.kubernetes.io/cri-socket: /var/run/dockershim.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Thu, 14 Jan 2021 14:20:19 -0500
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  minikube
+  AcquireTime:     <unset>
+  RenewTime:       Mon, 18 Jan 2021 19:27:28 -0500
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Mon, 18 Jan 2021 19:24:20 -0500   Thu, 14 Jan 2021 14:20:19 -0500   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Mon, 18 Jan 2021 19:24:20 -0500   Thu, 14 Jan 2021 14:20:19 -0500   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Mon, 18 Jan 2021 19:24:20 -0500   Thu, 14 Jan 2021 14:20:19 -0500   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            True    Mon, 18 Jan 2021 19:24:20 -0500   Thu, 14 Jan 2021 14:20:30 -0500   KubeletReady                 kubelet is posting ready status
+Addresses:
+  InternalIP:  192.168.49.2
+  Hostname:    minikube
+Capacity:
+  cpu:                8
+  ephemeral-storage:  99749992Ki
+  hugepages-2Mi:      0
+  memory:             12250436Ki
+  pods:               110
+Allocatable:
+  cpu:                8
+  ephemeral-storage:  99749992Ki
+  hugepages-2Mi:      0
+  memory:             12250436Ki
+  pods:               110
+System Info:
+  Machine ID:                 f5f55f7a7d474bfa972febd0aa374b4e
+  System UUID:                cfcd74dd-80e5-44c5-bca2-74f2c062cb97
+  Boot ID:                    c8d4899c-63c7-49e6-8add-cbea7481a41e
+  Kernel Version:             5.8.0-38-generic
+  OS Image:                   Ubuntu 20.04.1 LTS
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  docker://20.10.0
+  Kubelet Version:            v1.20.0
+  Kube-Proxy Version:         v1.20.0
+PodCIDR:                      10.244.0.0/24
+PodCIDRs:                     10.244.0.0/24
+Non-terminated Pods:          (12 in total)
+  Namespace                   Name                                         CPU Requests  CPU Limits  Memory Requests  Memory Limits  AGE
+  ---------                   ----                                         ------------  ----------  ---------------  -------------  ---
+  default                     pyflaskapp-deployment-7b999b7f87-9cjt9       0 (0%)        0 (0%)      0 (0%)           0 (0%)         25h
+  default                     pyflaskapp-deployment-7b999b7f87-qqb72       0 (0%)        0 (0%)      0 (0%)           0 (0%)         25h
+  default                     pyflaskapp-deployment-7b999b7f87-sjdgc       0 (0%)        0 (0%)      0 (0%)           0 (0%)         25h
+  kube-system                 coredns-74ff55c5b-j5qqt                      100m (1%)     0 (0%)      70Mi (0%)        170Mi (1%)     4d5h
+  kube-system                 etcd-minikube                                100m (1%)     0 (0%)      100Mi (0%)       0 (0%)         4d5h
+  kube-system                 kube-apiserver-minikube                      250m (3%)     0 (0%)      0 (0%)           0 (0%)         4d5h
+  kube-system                 kube-controller-manager-minikube             200m (2%)     0 (0%)      0 (0%)           0 (0%)         4d5h
+  kube-system                 kube-proxy-xdckm                             0 (0%)        0 (0%)      0 (0%)           0 (0%)         4d5h
+  kube-system                 kube-scheduler-minikube                      100m (1%)     0 (0%)      0 (0%)           0 (0%)         4d5h
+  kube-system                 storage-provisioner                          0 (0%)        0 (0%)      0 (0%)           0 (0%)         4d5h
+  kubernetes-dashboard        dashboard-metrics-scraper-c95fcf479-2bld8    0 (0%)        0 (0%)      0 (0%)           0 (0%)         24h
+  kubernetes-dashboard        kubernetes-dashboard-6cff4c7c4f-m626x        0 (0%)        0 (0%)      0 (0%)           0 (0%)         24h
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests    Limits
+  --------           --------    ------
+  cpu                750m (9%)   0 (0%)
+  memory             170Mi (1%)  170Mi (1%)
+  ephemeral-storage  100Mi (0%)  0 (0%)
+  hugepages-2Mi      0 (0%)      0 (0%)
+Events:              <none>
+
+The pyflaskapp-service Node PORT number, mapped 8080 internally to 32001 externally,
+is used after the IP address listed above in the browswer to bring up the app.
+The cluseter services information long form, retrieved by kubectl describe services, is:
+Name:              kubernetes
+Namespace:         default
+Labels:            component=apiserver
+                   provider=kubernetes
+Annotations:       <none>
+Selector:          <none>
+Type:              ClusterIP
+IP Families:       <none>
+IP:                10.96.0.1
+IPs:               10.96.0.1
+Port:              https  443/TCP
+TargetPort:        8443/TCP
+Endpoints:         192.168.49.2:8443
+Session Affinity:  None
+Events:            <none>
+
+
+Name:                     pyflaskapp-service
+Namespace:                default
+Labels:                   <none>
+Annotations:              <none>
+Selector:                 app=pyflaskapp
+Type:                     NodePort
+IP Families:              <none>
+IP:                       10.99.5.91
+IPs:                      10.99.5.91
+Port:                     <unset>  8080/TCP
+TargetPort:               8080/TCP
+NodePort:                 <unset>  32001/TCP
+Endpoints:                172.17.0.5:8080,172.17.0.6:8080,172.17.0.7:8080
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+
+The cluseter deployments information long form, retrieved by kubectl describe deployments, is:
+Name:                   pyflaskapp-deployment
+Namespace:              default
+CreationTimestamp:      Sun, 17 Jan 2021 17:44:01 -0500
+Labels:                 app=pyflaskapp
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               app=pyflaskapp
+Replicas:               3 desired | 3 updated | 3 total | 3 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=pyflaskapp
+  Containers:
+   pyflaskapp-container:
+    Image:        pouellette123/sba-pyflaskapp
+    Port:         8080/TCP
+    Host Port:    0/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   pyflaskapp-deployment-7b999b7f87 (3/3 replicas created)
+Events:          <none>
+
+The cluseter pods information long form, retrieved by kubectl dsescribe pods, is:
+Name:         pyflaskapp-deployment-7b999b7f87-9cjt9
+Namespace:    default
+Priority:     0
+Node:         minikube/192.168.49.2
+Start Time:   Sun, 17 Jan 2021 17:44:02 -0500
+Labels:       app=pyflaskapp
+              pod-template-hash=7b999b7f87
+Annotations:  <none>
+Status:       Running
+IP:           172.17.0.5
+IPs:
+  IP:           172.17.0.5
+Controlled By:  ReplicaSet/pyflaskapp-deployment-7b999b7f87
+Containers:
+  pyflaskapp-container:
+    Container ID:   docker://7eb036581368fc094f886f9606e5371fe379fd5b21ce8db8105a43bb5d4ae1dc
+    Image:          pouellette123/sba-pyflaskapp
+    Image ID:       docker-pullable://pouellette123/sba-pyflaskapp@sha256:d94f9091fb8eff725c3d6f3c5bd9916beef755794a24e7695b2adb823190ba03
+    Port:           8080/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Sun, 17 Jan 2021 17:45:03 -0500
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-9vjr4 (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  default-token-9vjr4:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-9vjr4
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                 node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:          <none>
+
+
+Name:         pyflaskapp-deployment-7b999b7f87-qqb72
+Namespace:    default
+Priority:     0
+Node:         minikube/192.168.49.2
+Start Time:   Sun, 17 Jan 2021 17:44:02 -0500
+Labels:       app=pyflaskapp
+              pod-template-hash=7b999b7f87
+Annotations:  <none>
+Status:       Running
+IP:           172.17.0.6
+IPs:
+  IP:           172.17.0.6
+Controlled By:  ReplicaSet/pyflaskapp-deployment-7b999b7f87
+Containers:
+  pyflaskapp-container:
+    Container ID:   docker://115c0629c427dbf9f5c297faf56419308b9adab860b38508eed149bad548ea6f
+    Image:          pouellette123/sba-pyflaskapp
+    Image ID:       docker-pullable://pouellette123/sba-pyflaskapp@sha256:d94f9091fb8eff725c3d6f3c5bd9916beef755794a24e7695b2adb823190ba03
+    Port:           8080/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Sun, 17 Jan 2021 17:45:03 -0500
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-9vjr4 (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  default-token-9vjr4:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-9vjr4
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                 node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:          <none>
+
+
+Name:         pyflaskapp-deployment-7b999b7f87-sjdgc
+Namespace:    default
+Priority:     0
+Node:         minikube/192.168.49.2
+Start Time:   Sun, 17 Jan 2021 17:44:02 -0500
+Labels:       app=pyflaskapp
+              pod-template-hash=7b999b7f87
+Annotations:  <none>
+Status:       Running
+IP:           172.17.0.7
+IPs:
+  IP:           172.17.0.7
+Controlled By:  ReplicaSet/pyflaskapp-deployment-7b999b7f87
+Containers:
+  pyflaskapp-container:
+    Container ID:   docker://643c70d64aaa3b9f83785f80eb001ea2a8d5fac4d8a9df35a1c4e74fa732dc18
+    Image:          pouellette123/sba-pyflaskapp
+    Image ID:       docker-pullable://pouellette123/sba-pyflaskapp@sha256:d94f9091fb8eff725c3d6f3c5bd9916beef755794a24e7695b2adb823190ba03
+    Port:           8080/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Sun, 17 Jan 2021 17:45:03 -0500
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-9vjr4 (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  default-token-9vjr4:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-9vjr4
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                 node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:          <none>
